@@ -19,6 +19,11 @@ This library enables the automatic resizing of the height and width of both same
 * Works with [ViewerJS](http://viewerjs.org/) to support PDF and ODF documents.
 * Fallback support down to IE8.
 
+### What this fork changed
+- add one more option in `heightCalculationMethod`, can pass `customElement;[selector];[scroll|offset]`
+
+
+
 ### Getting started
 The package contains two minified JavaScript files in the [js](js) folder. The first ([iframeResizer.min.js](https://raw.githubusercontent.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.min.js)) is for the page hosting the iFrames. It can be called with **native** JavaScript;
 
@@ -330,7 +335,7 @@ Ask the containing page for its positioning coordinates. You need to provide a c
 
 Your callback function will be recalled when the parent page is scrolled or resized.
 
-Pass `false` to disable the callback. 
+Pass `false` to disable the callback.
 
 ### scrollTo(x,y)
 
@@ -513,7 +518,7 @@ The parentIFrame methods object in the iFrame is now always available and the `e
 ## Version History
 
 * v3.5.3 [#283](https://github.com/davidjbradshaw/iframe-resizer/issues/283) Added *readystatechange* event listener.
-* v3.5.2 [#314](https://github.com/davidjbradshaw/iframe-resizer/pull/314) Add iframeHeight and iframeWidth properties to pageInfo [[Pierre Olivier](https://github.com/pomartel)]. [#303](https://github.com/davidjbradshaw/iframe-resizer/issues/303) Fix issue with IE8 polyFils. 
+* v3.5.2 [#314](https://github.com/davidjbradshaw/iframe-resizer/pull/314) Add iframeHeight and iframeWidth properties to pageInfo [[Pierre Olivier](https://github.com/pomartel)]. [#303](https://github.com/davidjbradshaw/iframe-resizer/issues/303) Fix issue with IE8 polyFils.
 * v3.5.1 [#286](https://github.com/davidjbradshaw/iframe-resizer/issues/286) Fixed *taggedElement / lowestElement / rightMostElement* to calculate correct margin [[Dan Ballance](danballance)].
 * v3.5.0 Recall getPageInfo callback when parent page position changes. Added *Array.prototype.forEach* to IE8 polyfils.
 * v3.4.2 Only teardown events on close if currently enabled.
