@@ -22,6 +22,8 @@
 		bodyObserver          = null,
 		bodyPadding           = '',
 		calculateWidth        = false,
+		customSelector				= '',
+		customMode						= '',
 		doubleEventList       = {'resize':1,'click':1},
 		eventCancelTimer      = 128,
 		firstRun              = true,
@@ -172,6 +174,13 @@
 			return 'true' === str ? true : false;
 		}
 
+		function strSpliter(str){
+			var pieces = str.split(';');
+			return function getByIndex(index){
+				return !!pieces[index] ? pieces[index] : '';
+			};
+		}
+
 		var data = initMsg.substr(msgIdLen).split(':');
 
 		myID               = data[0];
@@ -181,7 +190,9 @@
 		interval           = (undefined !== data[4]) ? Number(data[4])   : interval;
 		autoResize         = (undefined !== data[6]) ? strBool(data[6])  : autoResize;
 		bodyMarginStr      = data[7];
-		heightCalcMode     = (undefined !== data[8]) ? data[8]           : heightCalcMode;
+		heightCalcMode     = (undefined !== data[8]) ? strSpliter(data[8])(0) : heightCalcMode;
+		customSelector     = (undefined !== data[8]) ? strSpliter(data[8])(1) : customSelector;
+		customMode         = (undefined !== data[8]) ? strSpliter(data[8])(2) : customMode;
 		bodyBackground     = data[9];
 		bodyPadding        = data[10];
 		tolerance          = (undefined !== data[11]) ? Number(data[11]) : tolerance;
@@ -779,6 +790,17 @@
 
 			taggedElement: function getTaggedElementsHeight(){
 				return getTaggedElements('bottom','data-iframe-height');
+			},
+
+			customElement: function getCustomHeight(){
+				var selector = customSelector ? customSelector : 'body';
+				var mode = customMode ? customMode : 'offset';
+				var el = document.querySelector(selector);
+				if(mode === 'offset'){
+					return el.offsetHeight;
+				}else{
+					return el.scrollHeight;
+				}
 			}
 		},
 
